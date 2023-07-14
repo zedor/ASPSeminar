@@ -20,6 +20,11 @@ namespace ASP_Seminar.Models
         [Column(TypeName = "decimal(9,2)")]
         public decimal Price { get; set; }
 
+        public bool? HasImage { get; set; }
+
+        [NotMapped]
+        public IFormFile? ImgFile { get; set; }
+
         [ForeignKey("ProductId")]
         public List<ProductCategory>? ProductCategories { get; set; }
 

@@ -49,7 +49,7 @@ namespace ASP_Seminar.Data
         internal void SeedProducts(ModelBuilder builder)
         {
             builder.Entity<Product>()
-                .HasData(   new Product() { Id = 1, Title = "Udica 1/0", Description = "Sharpest hook in the shed.", Price = 3.90m, Quantity = 15 },
+                .HasData(   new Product() { Id = 1, Title = "Udica 1/0", Description = "Sharpest hook in the shed.", Price = 3.90m, Quantity = 15, HasImage = true },
                             new Product() { Id = 2, Title = "Udica 2/0", Description = "Sharpest hook in the shed.", Price = 3.90m, Quantity = 25 },
                             new Product() { Id = 3, Title = "Udica 4/0", Description = "Sharpest hook in the shed.", Price = 3.90m, Quantity = 17 },
                             new Product() { Id = 4, Title = "Udica 2", Description = "Sharpest hook in the shed.", Price = 3.90m, Quantity = 23 },

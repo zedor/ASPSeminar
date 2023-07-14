@@ -68,10 +68,23 @@ namespace ASP_Seminar.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Quantity,Price")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,Quantity,Price,HasImage")] Product product)
         {
             if (ModelState.IsValid)
             {
+                string wwwRootPath = "wwwroot";
+                // ime fajla
+                string fileName = product.Id.ToString();
+                product.HasImage = true;
+                string path = wwwRootPath + "/images/" + fileName;
+                // spremiti na file system
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    product.ImgFile?.CopyTo(fileStream);
+                }
+
+                if (product.ImgFile == null ) product.HasImage = false;
+
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
