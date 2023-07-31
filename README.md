@@ -17,6 +17,7 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
+* [Api](#api)
 * [License](#license)
 
 ## About The Project
@@ -49,6 +50,16 @@ update-database
 ```
 
 3. Build and run the application
+
+## API
+
+Access the API endpoints at:
+
+```
+http://localhost:PORT/api/products
+http://localhost:PORT/api/product/{id}
+example: http://localhost:5056/api/product/5
+```
 
 ## License
 
