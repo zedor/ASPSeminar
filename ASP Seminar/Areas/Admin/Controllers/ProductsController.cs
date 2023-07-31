@@ -61,9 +61,16 @@ namespace ASP_Seminar.Areas.Admin.Controllers
         }
 
         // GET: Admin/Products/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            ProductVM productModel = new ProductVM();
+            var buff = await _context.Category.ToListAsync();
+            foreach (var item in buff)
+            {
+                productModel.Categories.Add(new CategoryVM { Id = item.Id, Title = item.Title, Selected = false });
+            }
+
+            return View(productModel);
         }
 
         // POST: Admin/Products/Create
@@ -71,10 +78,12 @@ namespace ASP_Seminar.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Quantity,Price,HasImage,ImgFile")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,Quantity,Price,HasImage,ImgFile,Categories")] ProductVM modelProduct)
         {
             if (ModelState.IsValid)
             {
+                Product product = new Product();
+                product = ViewModelToProduct(modelProduct);
 
                 if (product.ImgFile == null) product.HasImage = false; else product.HasImage = true;
                 
@@ -94,7 +103,74 @@ namespace ASP_Seminar.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(modelProduct);
+        }
+
+        [NonAction]
+        private Product ViewModelToProduct(ProductVM product)
+        {
+            Product result = new Product();
+            result.Id = product.Id;
+            result.Title = product.Title;
+            result.Description = product.Description;
+            result.Quantity = product.Quantity;
+            result.Price = product.Price;
+            result.HasImage = product.HasImage;
+            result.ImgFile = product.ImgFile;
+            result.ProductCategories = new List<ProductCategory>();
+
+            foreach (var item in product.Categories)
+            {
+                if (item.Selected)
+                {
+                    ProductCategory buff = new ProductCategory();
+                    buff.CategoryId = item.Id;
+                    buff.ProductId = product.Id;
+                    //_context.ProductCategory?.Add(buff);
+                    result.ProductCategories.Add(buff);
+                }
+            }
+
+            //_context.SaveChanges();
+
+            return result;
+        }
+
+        [NonAction]
+        private ProductVM ProductToViewModel(Product product)
+        {
+            ProductVM result = new ProductVM();
+            result.Id = product.Id;
+            result.Title = product.Title;
+            result.Description = product.Description;
+            result.Quantity = product.Quantity;
+            result.Price = product.Price;
+            result.HasImage = product.HasImage;
+            result.ImgFile = product.ImgFile;
+            result.Categories = new List<CategoryVM>();
+
+            if (_context.ProductCategory != null)
+            {
+                product.ProductCategories = _context.ProductCategory.Where(x => x.ProductId == product.Id).ToList();
+
+                foreach (var item in product.ProductCategories)
+                {
+                    if (_context.Category != null)
+                        item.CategoryTitle = _context.Category.FirstOrDefault(x => x.Id == item.CategoryId)?.Title;
+                }
+            }
+
+            var buff = _context.Category.ToList();
+            foreach (var item in buff)
+            {
+                bool boolValue;
+                if (product.ProductCategories == null) boolValue = false;
+                else boolValue = product.ProductCategories.Any(x => x.CategoryId == item.Id);
+                
+                result.Categories.Add(new CategoryVM { Id = item.Id, Title = item.Title,  Selected = boolValue });
+            }
+
+            return result;
         }
 
         // GET: Admin/Products/Edit/5
@@ -110,7 +186,7 @@ namespace ASP_Seminar.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            return View(product);
+            return View(ProductToViewModel(product));
         }
 
         // POST: Admin/Products/Edit/5
@@ -118,27 +194,37 @@ namespace ASP_Seminar.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Quantity,Price,ImgFile")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Quantity,Price,ImgFile,Categories")] ProductVM modelProduct)
         {
-            if (id != product.Id)
+            if (id != modelProduct.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                Product product = new Product();
                 try
                 {
-                    if (product.ImgFile == null) product.HasImage = false; else product.HasImage = true;
+                    product = ViewModelToProduct(modelProduct);
+                    
 
                     string fileName = product.Id.ToString() + ".png";
                     string wwwRootPath = "wwwroot";
                     string path = wwwRootPath + "/images/" + fileName;
 
-                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    if (product.ImgFile != null)
                     {
-                        product.ImgFile?.CopyTo(fileStream);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            product.ImgFile?.CopyTo(fileStream);
+                        }
+                        product.HasImage = true;
                     }
+                    else if (System.IO.File.Exists(path)) product.HasImage = true;
+                    else product.HasImage = false;
+
+                    if (_context.ProductCategory != null) await _context.ProductCategory.Where(x => x.ProductId == product.Id).ForEachAsync(x => _context.Remove(x));
 
                     _context.Update(product);
                     await _context.SaveChangesAsync();
@@ -156,7 +242,7 @@ namespace ASP_Seminar.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(modelProduct);
         }
 
         // GET: Admin/Products/Delete/5
@@ -190,6 +276,7 @@ namespace ASP_Seminar.Areas.Admin.Controllers
             if (product != null)
             {
                 _context.Product.Remove(product);
+                if( _context.ProductCategory != null ) await _context.ProductCategory.Where(x => x.ProductId == product.Id).ForEachAsync(x => _context.Remove(x));
             }
             
             await _context.SaveChangesAsync();

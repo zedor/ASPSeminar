@@ -163,6 +163,7 @@ namespace ASP_Seminar.Areas.Admin.Controllers
             if (category != null)
             {
                 _context.Category.Remove(category);
+                if (_context.ProductCategory != null) await _context.ProductCategory.Where(x => x.CategoryId == category.Id).ForEachAsync(x => _context.Remove(x));
             }
             
             await _context.SaveChangesAsync();

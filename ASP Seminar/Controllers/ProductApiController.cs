@@ -10,6 +10,7 @@ using ASP_Seminar.Models;
 
 namespace ASP_Seminar.Controllers
 {
+    [Route("api/")]
     [ApiController]
     public class ProductApiController : ControllerBase
     {

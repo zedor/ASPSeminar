@@ -916,15 +916,15 @@ namespace ASP_Seminar.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8f2da973-f007-4416-9d07-d222793681dc",
-                            ConcurrencyStamp = "ac338823-3955-4cb8-a725-4a2e9d2e5e67",
+                            Id = "607e6d23-879d-4c31-a7e5-b1c42f59b15c",
+                            ConcurrencyStamp = "a4f58a8e-cf8c-452b-9a57-d3a483647fe6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "00c267e7-b325-4e7f-b151-03c5e5aa3c5f",
-                            ConcurrencyStamp = "75ae35c0-7f57-4d57-aec5-2f0d1999c4ef",
+                            Id = "412098dd-c6e8-4545-81a2-1fb01b35e766",
+                            ConcurrencyStamp = "1360dc16-e8ff-44e6-846d-f8fa8cf18e85",
                             Name = "User",
                             NormalizedName = "USER"
                         });

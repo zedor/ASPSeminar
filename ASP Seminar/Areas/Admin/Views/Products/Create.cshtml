@@ -1,4 +1,4 @@
-﻿@model ASP_Seminar.Models.Product
+﻿@model ASP_Seminar.Models.ProductVM
 
 @{
     ViewData["Title"] = "Create";
@@ -36,6 +36,16 @@
                 <label asp-for="ImgFile" class="control-label"></label>
                 <input asp-for="ImgFile" type="file" class="form-control" />
                 <span asp-validation-for="ImgFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @for (var i = 0; i < Model.Categories.Count(); i++)
+                {
+                    <input type="hidden" asp-for="@Model.Categories[i].Id" />
+                    <input type="hidden" asp-for="@Model.Categories[i].Title" />
+                    <input type="checkbox" asp-for="@Model.Categories[i].Selected" class="form-check-input" />
+                    <label asp-for="@Model.Categories[i].Selected" class="control-label">@Model.Categories[i].Title</label>
+                    <span asp-validation-for="@Model.Categories[i].Title" class="text-danger"></span>
+                }
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
