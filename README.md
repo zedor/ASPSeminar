@@ -21,7 +21,7 @@
 
 ## About The Project
 
-![Screen Shot](images/ss01.png)
+![Screen Shot](ss01.png)
 
 Example project of a simple CMS based on ASP MVC .NET 6 with Entity Framework and Microsoft Identity.
 
