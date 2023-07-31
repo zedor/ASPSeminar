@@ -1,5 +1,3 @@
-# ASP Seminar
-
 <br/>
 <p align="center">
   <h3 align="center">ASP Seminar</h3>
@@ -16,7 +14,6 @@
 ## Table Of Contents
 
 * [About the Project](#about-the-project)
-* [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
