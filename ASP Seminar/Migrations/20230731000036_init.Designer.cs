@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP_Seminar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230713174240_images")]
-    partial class images
+    [Migration("20230731000036_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -215,8 +215,8 @@ namespace ASP_Seminar.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(9,2)");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(9,2)");
@@ -248,8 +248,8 @@ namespace ASP_Seminar.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(9,2)");
 
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(9,2)");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -265,280 +265,315 @@ namespace ASP_Seminar.Migrations
                         {
                             Id = 1,
                             Description = "Sharpest hook in the shed.",
+                            HasImage = true,
                             Price = 3.90m,
-                            Quantity = 15m,
+                            Quantity = 15,
                             Title = "Udica 1/0"
                         },
                         new
                         {
                             Id = 2,
                             Description = "Sharpest hook in the shed.",
+                            HasImage = true,
                             Price = 3.90m,
-                            Quantity = 25m,
+                            Quantity = 25,
                             Title = "Udica 2/0"
                         },
                         new
                         {
                             Id = 3,
                             Description = "Sharpest hook in the shed.",
+                            HasImage = true,
                             Price = 3.90m,
-                            Quantity = 17m,
+                            Quantity = 17,
                             Title = "Udica 4/0"
                         },
                         new
                         {
                             Id = 4,
                             Description = "Sharpest hook in the shed.",
+                            HasImage = true,
                             Price = 3.90m,
-                            Quantity = 23m,
+                            Quantity = 23,
                             Title = "Udica 2"
                         },
                         new
                         {
                             Id = 5,
                             Description = "Sharpest hook in the shed.",
+                            HasImage = true,
                             Price = 3.90m,
-                            Quantity = 12m,
+                            Quantity = 12,
                             Title = "Udica 4"
                         },
                         new
                         {
                             Id = 6,
                             Description = "Mostly for jigging, action 25-50g",
+                            HasImage = true,
                             Price = 79.9m,
-                            Quantity = 7m,
+                            Quantity = 7,
                             Title = "Jigmaher 5000"
                         },
                         new
                         {
                             Id = 7,
                             Description = "Mostly for jigging, action 15-25g",
+                            HasImage = true,
                             Price = 69.9m,
-                            Quantity = 2m,
+                            Quantity = 2,
                             Title = "Jigmaher 3000"
                         },
                         new
                         {
                             Id = 8,
                             Description = "Mostly for jigging, action 5-15g",
+                            HasImage = true,
                             Price = 59.9m,
-                            Quantity = 0m,
+                            Quantity = 0,
                             Title = "Jigmaher 2000"
                         },
                         new
                         {
                             Id = 9,
                             Description = "Grounded design! Action 20-50g",
+                            HasImage = true,
                             Price = 65m,
-                            Quantity = 5m,
+                            Quantity = 5,
                             Title = "Fermaher 50"
                         },
                         new
                         {
                             Id = 10,
                             Description = "Grounded design! Action 40-70g",
+                            HasImage = true,
                             Price = 75m,
-                            Quantity = 3m,
+                            Quantity = 3,
                             Title = "Fermaher 60"
                         },
                         new
                         {
                             Id = 11,
                             Description = "Grounded design! Action 60-120g",
+                            HasImage = true,
                             Price = 95m,
-                            Quantity = 3m,
+                            Quantity = 3,
                             Title = "Fermaher 70"
                         },
                         new
                         {
                             Id = 12,
                             Description = "Float like a butterfly, fish in the sea. 3.0m",
+                            HasImage = true,
                             Price = 52m,
-                            Quantity = 4m,
+                            Quantity = 4,
                             Title = "Plovakher 10"
                         },
                         new
                         {
                             Id = 13,
                             Description = "Float like a butterfly, fish in the sea. 3.7m",
+                            HasImage = true,
                             Price = 59m,
-                            Quantity = 2m,
+                            Quantity = 2,
                             Title = "Plovakher 11"
                         },
                         new
                         {
                             Id = 14,
                             Description = "Float like a butterfly, fish in the sea. 4.0m",
+                            HasImage = true,
                             Price = 69m,
-                            Quantity = 1m,
+                            Quantity = 1,
                             Title = "Plovakher 12"
                         },
                         new
                         {
                             Id = 15,
                             Description = "Float like a butterfly, fish in the sea. 4.2m",
+                            HasImage = true,
                             Price = 85m,
-                            Quantity = 1m,
+                            Quantity = 1,
                             Title = "Plovakher 13"
                         },
                         new
                         {
                             Id = 16,
                             Description = "Durable, better than the rest!",
+                            HasImage = true,
                             Price = 8.9m,
-                            Quantity = 12m,
+                            Quantity = 12,
                             Title = "Monolayn .17 Ultra"
                         },
                         new
                         {
                             Id = 17,
                             Description = "Durable, better than the rest!",
+                            HasImage = true,
                             Price = 8.9m,
-                            Quantity = 15m,
+                            Quantity = 15,
                             Title = "Monolayn .22 Ultra"
                         },
                         new
                         {
                             Id = 18,
                             Description = "Durable, better than the rest!",
+                            HasImage = true,
                             Price = 8.9m,
-                            Quantity = 9m,
+                            Quantity = 9,
                             Title = "Monolayn .25 Ultra"
                         },
                         new
                         {
                             Id = 19,
                             Description = "Durable, better than the rest!",
+                            HasImage = true,
                             Price = 9.9m,
-                            Quantity = 8m,
+                            Quantity = 8,
                             Title = "Monolayn .28 Ultra"
                         },
                         new
                         {
                             Id = 20,
                             Description = "Durable, better than the rest!",
+                            HasImage = true,
                             Price = 9.9m,
-                            Quantity = 10m,
+                            Quantity = 10,
                             Title = "Monolayn .35 Ultra"
                         },
                         new
                         {
                             Id = 21,
                             Description = "Durable, better than the rest!",
+                            HasImage = true,
                             Price = 12.9m,
-                            Quantity = 5m,
+                            Quantity = 5,
                             Title = "Monolayn .40 Ultra"
                         },
                         new
                         {
                             Id = 22,
                             Description = "Durable!",
+                            HasImage = true,
                             Price = 6.9m,
-                            Quantity = 13m,
+                            Quantity = 13,
                             Title = "Monolayn .16 Mid"
                         },
                         new
                         {
                             Id = 23,
                             Description = "Durable!",
+                            HasImage = true,
                             Price = 7.9m,
-                            Quantity = 12m,
+                            Quantity = 12,
                             Title = "Monolayn .235 Mid"
                         },
                         new
                         {
                             Id = 24,
                             Description = "For tournaments and recreational use.",
+                            HasImage = true,
                             Price = 18.25m,
-                            Quantity = 7m,
+                            Quantity = 7,
                             Title = "Shpagodenica #.4 Pro X8"
                         },
                         new
                         {
                             Id = 25,
                             Description = "For tournaments and recreational use.",
+                            HasImage = true,
                             Price = 18.25m,
-                            Quantity = 6m,
+                            Quantity = 6,
                             Title = "Shpagodenica #.6 Pro X8"
                         },
                         new
                         {
                             Id = 26,
                             Description = "For tournaments and recreational use.",
+                            HasImage = true,
                             Price = 22.25m,
-                            Quantity = 7m,
+                            Quantity = 7,
                             Title = "Shpagodenica #.8 Pro X8"
                         },
                         new
                         {
                             Id = 27,
                             Description = "For tournaments and recreational use.",
+                            HasImage = true,
                             Price = 24.25m,
-                            Quantity = 4m,
+                            Quantity = 4,
                             Title = "Shpagodenica #1 Pro X8"
                         },
                         new
                         {
                             Id = 28,
                             Description = "For recreational use.",
+                            HasImage = true,
                             Price = 14.25m,
-                            Quantity = 9m,
+                            Quantity = 9,
                             Title = "Shpagodenica #.6 X4"
                         },
                         new
                         {
                             Id = 29,
                             Description = "For recreational use.",
+                            HasImage = true,
                             Price = 15.25m,
-                            Quantity = 4m,
+                            Quantity = 4,
                             Title = "Shpagodenica #.8 X4"
                         },
                         new
                         {
                             Id = 30,
                             Description = "For recreational use.",
+                            HasImage = true,
                             Price = 16.25m,
-                            Quantity = 5m,
+                            Quantity = 5,
                             Title = "Shpagodenica #1 X4"
                         },
                         new
                         {
                             Id = 31,
                             Description = "Floats to the bottom.",
+                            HasImage = true,
                             Price = 0.5m,
-                            Quantity = 15m,
+                            Quantity = 15,
                             Title = "Olovnica Teary 5g"
                         },
                         new
                         {
                             Id = 32,
                             Description = "Floats to the bottom.",
+                            HasImage = true,
                             Price = 0.5m,
-                            Quantity = 12m,
+                            Quantity = 12,
                             Title = "Olovnica Teary 10g"
                         },
                         new
                         {
                             Id = 33,
                             Description = "Floats to the bottom.",
+                            HasImage = true,
                             Price = 0.5m,
-                            Quantity = 14m,
+                            Quantity = 14,
                             Title = "Olovnica Teary 15g"
                         },
                         new
                         {
                             Id = 34,
                             Description = "Sinks like a small rock.",
+                            HasImage = true,
                             Price = 1m,
-                            Quantity = 11m,
+                            Quantity = 11,
                             Title = "Olovnica Diamonde 25g"
                         },
                         new
                         {
                             Id = 35,
                             Description = "Sinks like a small rock.",
+                            HasImage = true,
                             Price = 1m,
-                            Quantity = 7m,
+                            Quantity = 7,
                             Title = "Olovnica Diamonde 30g"
                         });
                 });
@@ -883,10 +918,17 @@ namespace ASP_Seminar.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cd36cb62-8655-4bc3-8b51-1baf326c5de8",
-                            ConcurrencyStamp = "d1f6dbd4-57d7-48f2-b416-f8e4eb1ebbdd",
+                            Id = "8f2da973-f007-4416-9d07-d222793681dc",
+                            ConcurrencyStamp = "ac338823-3955-4cb8-a725-4a2e9d2e5e67",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "00c267e7-b325-4e7f-b151-03c5e5aa3c5f",
+                            ConcurrencyStamp = "75ae35c0-7f57-4d57-aec5-2f0d1999c4ef",
+                            Name = "User",
+                            NormalizedName = "USER"
                         });
                 });
 

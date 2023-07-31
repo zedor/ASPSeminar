@@ -8,8 +8,7 @@ namespace ASP_Seminar.Models
         public int Id { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
-        [Column(TypeName = "decimal(9,2)")]
-        public decimal Quantity { get; set; }
+        public int Quantity { get; set; }
         [Column(TypeName = "decimal(9,2)")]
         public decimal Total { get; set; }
 

@@ -48,6 +48,7 @@ namespace ASP_Seminar
             var cultureInfo = new CultureInfo("hr-HR");
             cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
             cultureInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+            cultureInfo.NumberFormat.CurrencySymbol = "€";
 
             // konfiguracija lokalizacije
             app.UseRequestLocalization(new RequestLocalizationOptions

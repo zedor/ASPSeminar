@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace ASP_Seminar.Models
 {
@@ -12,6 +13,7 @@ namespace ASP_Seminar.Models
         public string? Title { get; set; }
 
         [ForeignKey("CategoryId")]
+        [DisplayName("Products")]
         public List<ProductCategory>? ProductCategories { get; set; }
 
     }

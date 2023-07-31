@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace ASP_Seminar.Models
 {
@@ -14,10 +15,10 @@ namespace ASP_Seminar.Models
         [Required]
         public string? Description { get; set; }
         [Required]
-        [Column(TypeName = "decimal(9,2)")]
-        public decimal Quantity { get; set; }
+        public int Quantity { get; set; }
         [Required]
         [Column(TypeName = "decimal(9,2)")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal Price { get; set; }
 
         public bool? HasImage { get; set; }
@@ -26,6 +27,7 @@ namespace ASP_Seminar.Models
         public IFormFile? ImgFile { get; set; }
 
         [ForeignKey("ProductId")]
+        [DisplayName("Categories")]
         public List<ProductCategory>? ProductCategories { get; set; }
 
 

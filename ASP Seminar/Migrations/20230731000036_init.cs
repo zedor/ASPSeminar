@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASP_Seminar.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,8 +72,9 @@ namespace ASP_Seminar.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(9,2)", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
+                    HasImage = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -274,7 +275,7 @@ namespace ASP_Seminar.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(9,2)", nullable: false)
                 },
                 constraints: table =>
@@ -297,7 +298,126 @@ namespace ASP_Seminar.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "8584982f-3be7-4b35-a4fc-14d2fa00c5ef", "00e7eb67-7bd1-4885-bcbc-ceeeb2b2d9b5", "Admin", "ADMIN" });
+                values: new object[,]
+                {
+                    { "00c267e7-b325-4e7f-b151-03c5e5aa3c5f", "75ae35c0-7f57-4d57-aec5-2f0d1999c4ef", "User", "USER" },
+                    { "8f2da973-f007-4416-9d07-d222793681dc", "ac338823-3955-4cb8-a725-4a2e9d2e5e67", "Admin", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "Id", "Title" },
+                values: new object[,]
+                {
+                    { 1, "LRF" },
+                    { 2, "HRF" },
+                    { 3, "Udica" },
+                    { 4, "Stap" },
+                    { 5, "Jig" },
+                    { 6, "Najlon" },
+                    { 7, "Upredenica" },
+                    { 8, "Olovo" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Description", "HasImage", "Price", "Quantity", "Title" },
+                values: new object[,]
+                {
+                    { 1, "Sharpest hook in the shed.", true, 3.90m, 15, "Udica 1/0" },
+                    { 2, "Sharpest hook in the shed.", true, 3.90m, 25, "Udica 2/0" },
+                    { 3, "Sharpest hook in the shed.", true, 3.90m, 17, "Udica 4/0" },
+                    { 4, "Sharpest hook in the shed.", true, 3.90m, 23, "Udica 2" },
+                    { 5, "Sharpest hook in the shed.", true, 3.90m, 12, "Udica 4" },
+                    { 6, "Mostly for jigging, action 25-50g", true, 79.9m, 7, "Jigmaher 5000" },
+                    { 7, "Mostly for jigging, action 15-25g", true, 69.9m, 2, "Jigmaher 3000" },
+                    { 8, "Mostly for jigging, action 5-15g", true, 59.9m, 0, "Jigmaher 2000" },
+                    { 9, "Grounded design! Action 20-50g", true, 65m, 5, "Fermaher 50" },
+                    { 10, "Grounded design! Action 40-70g", true, 75m, 3, "Fermaher 60" },
+                    { 11, "Grounded design! Action 60-120g", true, 95m, 3, "Fermaher 70" },
+                    { 12, "Float like a butterfly, fish in the sea. 3.0m", true, 52m, 4, "Plovakher 10" },
+                    { 13, "Float like a butterfly, fish in the sea. 3.7m", true, 59m, 2, "Plovakher 11" },
+                    { 14, "Float like a butterfly, fish in the sea. 4.0m", true, 69m, 1, "Plovakher 12" },
+                    { 15, "Float like a butterfly, fish in the sea. 4.2m", true, 85m, 1, "Plovakher 13" },
+                    { 16, "Durable, better than the rest!", true, 8.9m, 12, "Monolayn .17 Ultra" },
+                    { 17, "Durable, better than the rest!", true, 8.9m, 15, "Monolayn .22 Ultra" },
+                    { 18, "Durable, better than the rest!", true, 8.9m, 9, "Monolayn .25 Ultra" },
+                    { 19, "Durable, better than the rest!", true, 9.9m, 8, "Monolayn .28 Ultra" },
+                    { 20, "Durable, better than the rest!", true, 9.9m, 10, "Monolayn .35 Ultra" },
+                    { 21, "Durable, better than the rest!", true, 12.9m, 5, "Monolayn .40 Ultra" },
+                    { 22, "Durable!", true, 6.9m, 13, "Monolayn .16 Mid" },
+                    { 23, "Durable!", true, 7.9m, 12, "Monolayn .235 Mid" },
+                    { 24, "For tournaments and recreational use.", true, 18.25m, 7, "Shpagodenica #.4 Pro X8" },
+                    { 25, "For tournaments and recreational use.", true, 18.25m, 6, "Shpagodenica #.6 Pro X8" },
+                    { 26, "For tournaments and recreational use.", true, 22.25m, 7, "Shpagodenica #.8 Pro X8" },
+                    { 27, "For tournaments and recreational use.", true, 24.25m, 4, "Shpagodenica #1 Pro X8" },
+                    { 28, "For recreational use.", true, 14.25m, 9, "Shpagodenica #.6 X4" },
+                    { 29, "For recreational use.", true, 15.25m, 4, "Shpagodenica #.8 X4" },
+                    { 30, "For recreational use.", true, 16.25m, 5, "Shpagodenica #1 X4" },
+                    { 31, "Floats to the bottom.", true, 0.5m, 15, "Olovnica Teary 5g" },
+                    { 32, "Floats to the bottom.", true, 0.5m, 12, "Olovnica Teary 10g" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Description", "HasImage", "Price", "Quantity", "Title" },
+                values: new object[] { 33, "Floats to the bottom.", true, 0.5m, 14, "Olovnica Teary 15g" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Description", "HasImage", "Price", "Quantity", "Title" },
+                values: new object[] { 34, "Sinks like a small rock.", true, 1m, 11, "Olovnica Diamonde 25g" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Description", "HasImage", "Price", "Quantity", "Title" },
+                values: new object[] { 35, "Sinks like a small rock.", true, 1m, 7, "Olovnica Diamonde 30g" });
+
+            migrationBuilder.InsertData(
+                table: "ProductCategory",
+                columns: new[] { "Id", "CategoryId", "ProductId" },
+                values: new object[,]
+                {
+                    { 1, 3, 1 },
+                    { 2, 3, 2 },
+                    { 3, 3, 3 },
+                    { 4, 3, 4 },
+                    { 5, 3, 5 },
+                    { 6, 4, 6 },
+                    { 7, 4, 7 },
+                    { 8, 4, 8 },
+                    { 9, 4, 9 },
+                    { 10, 4, 10 },
+                    { 11, 4, 11 },
+                    { 12, 4, 12 },
+                    { 13, 4, 13 },
+                    { 14, 4, 14 },
+                    { 15, 4, 15 },
+                    { 16, 6, 16 },
+                    { 17, 6, 17 },
+                    { 18, 6, 18 },
+                    { 19, 6, 19 },
+                    { 20, 6, 20 },
+                    { 21, 6, 21 },
+                    { 22, 6, 22 },
+                    { 23, 6, 23 },
+                    { 24, 7, 24 },
+                    { 25, 7, 25 },
+                    { 26, 7, 26 },
+                    { 27, 7, 27 },
+                    { 28, 7, 28 },
+                    { 29, 7, 29 },
+                    { 30, 7, 30 },
+                    { 31, 8, 31 },
+                    { 32, 8, 32 },
+                    { 33, 8, 33 },
+                    { 34, 8, 34 },
+                    { 35, 8, 35 },
+                    { 36, 5, 6 },
+                    { 37, 5, 7 },
+                    { 38, 5, 8 },
+                    { 39, 1, 8 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

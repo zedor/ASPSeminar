@@ -8,14 +8,14 @@
     if (Model.HasImage.HasValue && (bool)Model.HasImage )
             imgSrc = "~/images/" + Model.Id.ToString() + ".png";
 }
-    <div class="card mx-auto col-md-3 col-10 mt-5">
-        <img src="@imgSrc" class="mx-auto img-thumbnail" asp-append-version="true" />
-        <div class="card-body text-center mx-auto">
-            <div class='cvp'>
-                <h5 class="card-title font-weight-bold">@Model.Title</h5>
-                <p class="card-text">@Model.Price</p>
-                <a class="btn btn-outline-info" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id">Details</a>
-                <a class="btn btn-primary" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id">Add to cart</a>
-            </div>
+
+<div class="card mx-auto col-md-3 col-10 mt-5">
+    <img src="@imgSrc" class="mx-auto img-thumbnail" asp-append-version="true" />
+    <div class="card-body text-center mx-auto">
+        <div class='cvp'>
+            <h5 class="card-title font-weight-bold">@Model.Title</h5>
+            <p class="card-text">@Html.DisplayFor(model => model.Price)</p>
+            <a class="btn btn-outline-info" asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id">Details</a>
         </div>
     </div>
+</div>

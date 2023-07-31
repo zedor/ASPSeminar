@@ -68,25 +68,27 @@ namespace ASP_Seminar.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Quantity,Price,HasImage")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,Quantity,Price,HasImage,ImgFile")] Product product)
         {
             if (ModelState.IsValid)
             {
-                string wwwRootPath = "wwwroot";
-                // ime fajla
-                string fileName = product.Id.ToString();
-                product.HasImage = true;
-                string path = wwwRootPath + "/images/" + fileName;
-                // spremiti na file system
-                using (var fileStream = new FileStream(path, FileMode.Create))
-                {
-                    product.ImgFile?.CopyTo(fileStream);
-                }
 
-                if (product.ImgFile == null ) product.HasImage = false;
-
+                if (product.ImgFile == null) product.HasImage = false; else product.HasImage = true;
+                
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+
+                if (product.ImgFile != null)
+                {
+                    string fileName = product.Id.ToString() + ".png";
+                    string wwwRootPath = "wwwroot";
+                    string path = wwwRootPath + "/images/" + fileName;
+
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        product.ImgFile?.CopyTo(fileStream);
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
@@ -113,7 +115,7 @@ namespace ASP_Seminar.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Quantity,Price")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Quantity,Price,ImgFile")] Product product)
         {
             if (id != product.Id)
             {
@@ -124,6 +126,17 @@ namespace ASP_Seminar.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (product.ImgFile == null) product.HasImage = false; else product.HasImage = true;
+
+                    string fileName = product.Id.ToString() + ".png";
+                    string wwwRootPath = "wwwroot";
+                    string path = wwwRootPath + "/images/" + fileName;
+
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        product.ImgFile?.CopyTo(fileStream);
+                    }
+
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
