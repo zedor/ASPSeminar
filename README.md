@@ -51,6 +51,12 @@ update-database
 
 3. Build and run the application
 
+4. Default admin and password:
+```
+mail: b@b.a
+pass: sifrica1
+```
+
 ## API
 
 Access the API endpoints at:
