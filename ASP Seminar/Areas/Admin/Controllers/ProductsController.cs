@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASP_Seminar.Data;
 using ASP_Seminar.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ASP_Seminar.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
